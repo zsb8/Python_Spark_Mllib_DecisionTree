@@ -29,6 +29,28 @@ Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared 
 ~~~
 ![image](https://user-images.githubusercontent.com/75282285/192569344-5a66ba9f-4438-4e62-99c8-103a0e5433a7.png)
 
+Compared the different depth parameters. 
+~~~
+    impurity_list = ['entropy']
+    max_depth_list = [3, 5, 10, 15, 20, 25]
+    max_bins_list = [10]
+    my_metrics = [
+        train_evaluation_model(train_d, validation_d, impurity, max_depth, max_bins)
+        for impurity in impurity_list
+        for max_depth in max_depth_list
+        for max_bins in max_bins_list
+    ]
+    df = pd.DataFrame(my_metrics,
+                      index=max_depth_list,
+                      columns=['AUC', 'duration', 'impurity', 'maxDepth', 'maxBins', 'model'])
+    show_chart(df, 'impurity', 'AUC', 'duration')
+~~~
+![image](https://user-images.githubusercontent.com/75282285/192575513-50fce3a7-8d00-4d80-88a8-83c64e8d764f.png)
+
+
+
+
+
 
 # Stage2: Train and evaluate   
 Created the model using train data set.   
