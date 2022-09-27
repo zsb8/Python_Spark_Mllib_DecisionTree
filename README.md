@@ -9,7 +9,7 @@ Used the library is pyspark.mllib.
 Placed the tsv on hadoop. Built 3 data sets: (1) Train data, (2) Validation data, (3) Sub_test data.
 
 
-# Draw the picture
+# Draw the pictures
 ## Compare the impurities    
 Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared the results from them. Found use 'entropy' was better.
 ~~~
