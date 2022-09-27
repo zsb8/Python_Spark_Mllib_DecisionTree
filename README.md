@@ -12,6 +12,21 @@ Placed the tsv on hadoop. Built 3 data sets: (1) Train data, (2) Validation data
 # Draw the picture
 ## Compare the impurities    
 Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared the results from them. Found use 'entropy' was better.
+~~~
+    impurity_list = ['gini', 'entropy']
+    max_depth_list = [10]
+    max_bins_list = [10]
+    my_metrics = [
+        train_evaluation_model(train_d, validation_d, impurity, max_depth, max_bins)
+        for impurity in impurity_list
+        for max_depth in max_depth_list
+        for max_bins in max_bins_list
+    ]
+    df = pd.DataFrame(my_metrics,
+                      index=impurity_list,
+                      columns=['AUC', 'duration', 'impurity', 'maxDepth', 'maxBins', 'model'])
+    show_chart(df, 'impurity', 'AUC', 'duration')
+~~~
 ![image](https://user-images.githubusercontent.com/75282285/192569344-5a66ba9f-4438-4e62-99c8-103a0e5433a7.png)
 
 
