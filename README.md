@@ -81,14 +81,9 @@ Used the test data set and the best model to calculate the AUC. If testing AUC i
 ![image](https://user-images.githubusercontent.com/75282285/192605683-12852eb4-7343-4afd-8a88-3a61e6083259.png)
 
 
-
+# Spark monitor
 ![image](https://user-images.githubusercontent.com/75282285/192587362-ac4c79f9-f87c-4da9-9acc-b67412eb2fa5.png)
-
-
 ![image](https://user-images.githubusercontent.com/75282285/192587799-e3b653f6-4d73-4b33-8126-a1debb838366.png)
-
-
-
 ![image](https://user-images.githubusercontent.com/75282285/192587445-b66c945a-929d-4b42-80c5-5ab5df2d35c1.png)
 
 
