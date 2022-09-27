@@ -106,6 +106,11 @@ def predict_data(best_model):
 ![image](https://user-images.githubusercontent.com/75282285/192587799-e3b653f6-4d73-4b33-8126-a1debb838366.png)
 ![image](https://user-images.githubusercontent.com/75282285/192587445-b66c945a-929d-4b42-80c5-5ab5df2d35c1.png)
 
+# DebugString
+Print the DebugString.
+~~~
+print(model.toDebugString())
+~~~
 
 
 
