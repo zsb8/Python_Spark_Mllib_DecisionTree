@@ -23,10 +23,7 @@ def read_data():
     raw_data = raw_data_with_header.filter(lambda x: x != header)
     r_data = raw_data.map(lambda x: x.replace("\"", ""))
     lines = r_data.map(lambda x: x.split('\t'))
-    # print(f"count : {lines.count()}")  # 7395
-    # print(lines.first()[3:])
     categories_map = lines.map(lambda fields: fields[3]).distinct().zipWithIndex().collectAsMap()
-    # print(categories_map)
 
 
 def convert_float(x):
@@ -70,14 +67,6 @@ def create_model(train_data,
                                          impurity=impurity_parm,
                                          maxDepth=max_depth_parm,
                                          maxBins=max_bins_parm)
-    # data_rdd = lines.map(lambda r: (r[0], extract_features(r, categories_map, len(r))))
-    # dic_desc = {
-    #     0: 'temp web',
-    #     1: 'evergreen web'
-    # }
-    # for data in data_rdd.take(10):
-    #     result_predict = model.predict(data[1])
-    #     print(f"web:{data[0]}, \n predict:{result_predict}, desc: {dic_desc[result_predict]}")
     return model
 
 
@@ -103,7 +92,7 @@ def train_evaluation_model(train_data,
     return auc, duration, impurity_parm, max_depth_parm, max_bins_parm, model
 
 
-def show_chart(df, eval_parm, bar_parm, line_parm, y_min, y_max):
+def show_chart(df, eval_parm, bar_parm, line_parm, y_min=0.5, y_max=0.7):
     ax = df[bar_parm].plot(kind='bar', title=eval_parm, figsize=(10, 6), legend=True, fontsize=12)
     ax.set_xlabel(eval_parm, fontsize=12)
     ax.set_ylim([y_min, y_max])
@@ -123,7 +112,6 @@ def eval_parameter(train_data, validation_data):
         for max_depth in max_depth_list
         for max_bins in max_bins_list
     ]
-    # print(my_metrics)
     s_metrics = sorted(my_metrics, key=lambda x: x[0], reverse=True)
     best_parameter = s_metrics[0]
     print(f"the best inpurity is:{best_parameter[2]}\n"
@@ -135,21 +123,43 @@ def eval_parameter(train_data, validation_data):
     return best_auc, best_model
 
 
+def predict_data(best_model):
+    raw_data_with_header = sc.textFile(path + "test.tsv")
+    header = raw_data_with_header.first()
+    raw_data = raw_data_with_header.filter(lambda x: x != header)
+    r_data = raw_data.map(lambda x: x.replace("\"", ""))
+    lines_test = r_data.map(lambda x: x.split('\t'))
+    data_rdd = lines_test.map(lambda x: (x[0], extract_features(x, categories_map, len(x))))
+    dic_desc = {
+        0: 'temp web',
+        1: 'evergreen web'
+    }
+    for data in data_rdd.take(10):
+        result_predict = best_model.predict(data[1])
+        print(f"web:{data[0]}, \n predict:{result_predict}, desc: {dic_desc[result_predict]}")
+
+
 if __name__ == "__main__":
+    s_time = time()
     create_spark_context()
-    print("Reading data stage".center(30, "="))
+    print("Reading data stage".center(60, "="))
     read_data()
-    print("Training and evaluation stage".center(30, "="))
     train_d, validation_d, test_d = prepare_data()
     train_d.persist(); validation_d.persist(); test_d.persist()
-    train_evaluation_model(train_d, validation_d, "entropy", 5, 5)
-    print("Test stage, to judge if is over fitting".center(30, "="))
+    print("Training and evaluation stage".center(60, "="))
     auc, model = eval_parameter(train_d, validation_d)
+    print("Test stage,to judge it it over fitting".center(60, "="))
     test_data_auc = evaluate_model(model, test_d)
-    print(f"best auc is:{auc}, test_data_auc is: {test_data_auc}, "
-          f"they are only slightly different:{abs(float(auc)-float(test_data_auc))}")
+    print(f"best auc is:{format(auc, '.4f')}, test_data_auc is: {format(test_data_auc, '.4f')}, "
+          f"they are only slightly different:{format(abs(float(auc)-float(test_data_auc)),'.4f')}")
     train_d.unpersist()
     validation_d.unpersist()
     test_d.unpersist()
+    print("Prediction stage".center(60, "="))
+    predict_data(model)
+    dur = time() - s_time
+    print(f"Ran this task cost : {format(dur, '.4f')} seconds ")
+
+
 
 
