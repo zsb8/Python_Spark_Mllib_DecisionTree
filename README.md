@@ -6,7 +6,7 @@ Used the algorithm is DecisionTree.
 Used the library is pyspark.mllib.    
 
 # Stage1:  Read data
-Placed the tsv on hadoop. Built 3 data sets: (1) Train data, (2) Validation data, (3) Test data.
+Placed the tsv on hadoop. Built 3 data sets: (1) Train data, (2) Validation data, (3) Sub_test data.
 
 
 # Draw the picture
@@ -77,8 +77,29 @@ Found the best parameters includ the best AUC and the best model.
 
 
 # Stage3: Test
-Used the test data set and the best model to calculate the AUC. If testing AUC is similare as the best AUC, it is OK.
+Used the sub_test data set and the best model to calculate the AUC. If testing AUC is similare as the best AUC, it is OK.
 ![image](https://user-images.githubusercontent.com/75282285/192605683-12852eb4-7343-4afd-8a88-3a61e6083259.png)
+
+
+# Stage4: Predict
+Use the test data (in Hadoop, test.tsv) and the model (calculated after Stage2) to predict.
+~~~
+def predict_data(best_model):
+    raw_data_with_header = sc.textFile(path + "test.tsv")
+    header = raw_data_with_header.first()
+    raw_data = raw_data_with_header.filter(lambda x: x != header)
+    r_data = raw_data.map(lambda x: x.replace("\"", ""))
+    lines_test = r_data.map(lambda x: x.split('\t'))
+    data_rdd = lines_test.map(lambda x: (x[0], extract_features(x, categories_map, len(x))))
+    dic_desc = {
+        0: 'temp web',
+        1: 'evergreen web'
+    }
+    for data in data_rdd.take(10):
+        result_predict = best_model.predict(data[1])
+        print(f"web:{data[0]}, \n predict:{result_predict}, desc: {dic_desc[result_predict]}")
+~~~
+![image](https://user-images.githubusercontent.com/75282285/192613552-9d77a401-1667-47ac-9e7e-1f8725e15dbc.png)
 
 
 # Spark monitor
