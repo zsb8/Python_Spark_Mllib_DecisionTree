@@ -29,7 +29,7 @@ Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared 
 ~~~
 ![image](https://user-images.githubusercontent.com/75282285/192569344-5a66ba9f-4438-4e62-99c8-103a0e5433a7.png)
 
-Compared the difference of depth parameters. It looked use 10 as maxPath, the AUC was the best one, the cost time was not hight than others. 
+Compared the difference of depth parameters. It looked like the AUC was the best one if I use maxDepth=10, the cost time was not highter than others. 
 ~~~
     impurity_list = ['entropy']
     max_depth_list = [3, 5, 10, 15, 20, 25]
@@ -47,7 +47,7 @@ Compared the difference of depth parameters. It looked use 10 as maxPath, the AU
 ~~~
 ![image](https://user-images.githubusercontent.com/75282285/192575887-816a90e3-d786-4300-9932-e17c247371e2.png)
 
-Compared the difference of maxBins parameters.
+Compared the difference of maxBins parameters. It looked like the AUC was the best one if use maxBins=200.
 ~~~
     impurity_list = ['entropy']
     max_depth_list = [10]
@@ -61,9 +61,9 @@ Compared the difference of maxBins parameters.
     df = pd.DataFrame(my_metrics,
                       index=max_bins_list,
                       columns=['AUC', 'duration', 'impurity', 'maxDepth', 'maxBins', 'model'])
-    show_chart(df, 'maxDepth', 'AUC', 'duration')
+    show_chart(df, 'maxBins', 'AUC', 'duration')
 ~~~
-![image](https://user-images.githubusercontent.com/75282285/192578124-fc6dc9d6-ca00-446c-a630-5e86becfebc2.png)
+![image](https://user-images.githubusercontent.com/75282285/192578482-30a08976-e265-4500-9e18-c1f5e3041344.png)
 
 
 
