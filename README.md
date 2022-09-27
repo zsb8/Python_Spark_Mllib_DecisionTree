@@ -29,7 +29,7 @@ Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared 
 ~~~
 ![image](https://user-images.githubusercontent.com/75282285/192569344-5a66ba9f-4438-4e62-99c8-103a0e5433a7.png)
 
-Compared the difference of depth parameters. It looked like the AUC was the best one if I use maxDepth=10, the cost time was not highter than others. 
+Compared the difference of depth parameters. It looked like the AUC was the best one if I use maxDepth=10 this time, the cost time was not highter than others. 
 ~~~
     impurity_list = ['entropy']
     max_depth_list = [3, 5, 10, 15, 20, 25]
@@ -47,7 +47,7 @@ Compared the difference of depth parameters. It looked like the AUC was the best
 ~~~
 ![image](https://user-images.githubusercontent.com/75282285/192575887-816a90e3-d786-4300-9932-e17c247371e2.png)
 
-Compared the difference of maxBins parameters. It looked like the AUC was the best one if use maxBins=200.
+Compared the difference of maxBins parameters. It looked like the AUC was the best one if use maxBins=200 this time.
 ~~~
     impurity_list = ['entropy']
     max_depth_list = [10]
@@ -67,16 +67,18 @@ Compared the difference of maxBins parameters. It looked like the AUC was the be
 
 
 
-
-
 # Stage2: Train and evaluate   
 Created the model using train data set.   
 Calculated the AUC using validation data set.
 Sorted the metrics.    
 Found the best parameters includ the best AUC and the best model.   
+![image](https://user-images.githubusercontent.com/75282285/192605629-baa98d8f-39d9-423d-be10-32bca9cb4861.png)
+
+
 
 # Stage3: Test
 Used the test data set and the best model to calculate the AUC. If testing AUC is similare as the best AUC, it is OK.
+![image](https://user-images.githubusercontent.com/75282285/192605683-12852eb4-7343-4afd-8a88-3a61e6083259.png)
 
 
 
