@@ -29,7 +29,7 @@ Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared 
 ~~~
 ![image](https://user-images.githubusercontent.com/75282285/192569344-5a66ba9f-4438-4e62-99c8-103a0e5433a7.png)
 
-Compared the different depth parameters. 
+Compared the different depth parameters. It looked use 10 as maxPath, the AUC was the best one, the cost time was not hight than others. 
 ~~~
     impurity_list = ['entropy']
     max_depth_list = [3, 5, 10, 15, 20, 25]
