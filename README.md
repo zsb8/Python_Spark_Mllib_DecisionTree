@@ -43,9 +43,9 @@ Compared the different depth parameters.
     df = pd.DataFrame(my_metrics,
                       index=max_depth_list,
                       columns=['AUC', 'duration', 'impurity', 'maxDepth', 'maxBins', 'model'])
-    show_chart(df, 'impurity', 'AUC', 'duration')
+    show_chart(df, 'maxDepth', 'AUC', 'duration')
 ~~~
-![image](https://user-images.githubusercontent.com/75282285/192575513-50fce3a7-8d00-4d80-88a8-83c64e8d764f.png)
+![image](https://user-images.githubusercontent.com/75282285/192575887-816a90e3-d786-4300-9932-e17c247371e2.png)
 
 
 
