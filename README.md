@@ -1,6 +1,6 @@
-This is a sample code. Data is pubic.
+Data is pubic.
 # Python_Spark_DecisionTree
-use DecisionTree and BinaryClassificationMetrics to find evergreen. 
+Use DecisionTree and BinaryClassificationMetrics to find evergreen webside. 
 
 Running environment is Spark + Hadoop + PySpark    
 Used the algorithm is DecisionTree.     
