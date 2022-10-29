@@ -12,7 +12,7 @@ Placed the tsv on hadoop. Built 3 data sets: (1) Train data, (2) Validation data
 
 ## Compare the parameters
 Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared the results from them. Found use 'entropy' was better.
-~~~
+~~~python
     impurity_list = ['gini', 'entropy']
     max_depth_list = [10]
     max_bins_list = [10]
@@ -30,7 +30,7 @@ Impurity is the paramter of DecisionTree. I used 'gini' and 'entropy'. Compared 
 ![image](https://user-images.githubusercontent.com/75282285/192569344-5a66ba9f-4438-4e62-99c8-103a0e5433a7.png)
 
 Compared the difference of depth parameters. It looked like the AUC was the best one if I use maxDepth=10 this time, the cost time was not highter than others. 
-~~~
+~~~python
     impurity_list = ['entropy']
     max_depth_list = [3, 5, 10, 15, 20, 25]
     max_bins_list = [10]
@@ -48,7 +48,7 @@ Compared the difference of depth parameters. It looked like the AUC was the best
 ![image](https://user-images.githubusercontent.com/75282285/192575887-816a90e3-d786-4300-9932-e17c247371e2.png)
 
 Compared the difference of maxBins parameters. It looked like the AUC was the best one if use maxBins=200 this time.
-~~~
+~~~python
     impurity_list = ['entropy']
     max_depth_list = [10]
     max_bins_list = [3, 5, 10, 50, 100, 200]
@@ -83,7 +83,7 @@ Used the sub_test data set and the best model to calculate the AUC. If testing A
 
 # Stage4: Predict
 Use the test data (in Hadoop, test.tsv) and the model (calculated after Stage2) to predict.
-~~~
+~~~python
 def predict_data(best_model):
     raw_data_with_header = sc.textFile(path + "test.tsv")
     header = raw_data_with_header.first()
@@ -109,7 +109,7 @@ def predict_data(best_model):
 
 # DebugString
 Print the DebugString.
-~~~
+~~~python
 print(model.toDebugString())
 ~~~
 
