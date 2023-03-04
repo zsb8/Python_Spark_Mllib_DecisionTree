@@ -1,5 +1,6 @@
-This a sample code, not really business code. I won't expose the company's code.    
-Data is pubic.
+This is a sample code and not actual business code. I will not share the company's proprietary code.
+However, the data used in this sample code is publicly available.    
+
 # Python_Spark_DecisionTree
 Use DecisionTree and BinaryClassificationMetrics to find evergreen webside. 
 
