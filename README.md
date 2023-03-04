@@ -1,4 +1,4 @@
-This is a sample code and not actual business code. I will not share the company's proprietary code.
+This is a sample code and not actual business code. I will not share the company's proprietary code.    
 However, the data used in this sample code is publicly available.    
 
 # Python_Spark_DecisionTree
